@@ -24,11 +24,12 @@ function populateForm() {
 // object, save the whole thing back to local storage and update the screen
 // so that it shows the # of items in the cart and a quick preview of the cart itself.
 function handleSubmit(event) {
-
+  var product = event.target.items.value;
+  var quantity = event.target.quantity.value;
   // TODO: Prevent the page from reloading
   event.preventDefault();
   // Do all the things ...
-  addSelectedItemToCart(event);  //initiated
+  addSelectedItemToCart(product, quantity);  //initiated
   cart.saveToLocalStorage(); //
   updateCounter();
   updateCartPreview();
@@ -36,30 +37,36 @@ function handleSubmit(event) {
 }
 
 // TODO: Add the selected item and quantity to the cart
-function addSelectedItemToCart(event) {
-  console.log('addselectitemtocart function works');
+function addSelectedItemToCart(product, quantity) {
   // TODO: suss out the item picked from the select list
-  for(var i = 0; i < Product.allProducts.length; i++){
-    console.log('hit for loop');
-    if(event.target.items.value === Product.allProducts[i].name){            //check this when click to submit
-      console.log('target match');
-      var cartItem = document.createElement('p');
-      cartItem.textContent = `${event.target.items.value} ${event.target.quantity.value}`;
-    }
-  }
+  var item = new CartItem(product,quantity);
+  cart.items.push(item);
   // TODO: get the quantity
-  document.getElementById('cartContents').appendChild(cartItem);
+  
   // TODO: using those, add one item to the Cart
-
 }
 
 // TODO: Update the cart count in the header nav with the number of items in the Cart
-function updateCounter() {}
+function updateCounter() {
+  
+
+}
 
 // TODO: As you add items into the cart, show them (item & quantity) in the cart preview div
 function updateCartPreview() {
   // TODO: Get the item and quantity from the form
   // TODO: Add a new element to the cartContents div with that information
+  var product = event.target.items.value;
+  var quantity = event.target.quantity.value;
+  for(var i = 0; i < Product.allProducts.length; i++){
+    console.log('hit for loop');
+    if(event.target.items.value === Product.allProducts[i].name){            //check this when click to submit
+      console.log('target match');
+      var cartItem = document.createElement('p');
+      cartItem.textContent = `${product} ${quantity}`;
+    }
+  }
+  document.getElementById('cartContents').appendChild(cartItem);
 }
 
 // Set up the "submit" event listener on the form.
