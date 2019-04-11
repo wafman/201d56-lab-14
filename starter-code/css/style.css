@@ -1,1 +1,43 @@
 /* TODO: Make it awesome */
+header {
+  width: 960px;
+  margin: 30px auto;
+}
+
+header h1 {
+  display: inline-block;
+}
+
+nav li {
+  display: inline;
+}
+
+main {
+  width: 960px;
+  margin: 30px auto;
+  text-align: center;
+}
+
+.deck {
+  width: 960px;
+  margin: 30px auto;
+}
+
+.deck h1 {
+
+}
+
+.copy {
+  width: 960px;
+  margin: 30px auto;
+}
+
+.copy li {
+  line-height: 2em;
+}
+
+footer {
+  width: 960px;
+  margin: 30px  auto;
+  text-align: center;
+}
