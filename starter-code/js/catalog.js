@@ -14,6 +14,7 @@ function populateForm() {
   for (var i in Product.allProducts) {
     var optionEl = document.createElement('option');
     optionEl.textContent = Product.allProducts[i].name;
+    optionEl.value = Product.allProducts[i].name;
     selectElement.appendChild(optionEl);
   }
 
@@ -27,7 +28,7 @@ function handleSubmit(event) {
   // TODO: Prevent the page from reloading
   event.preventDefault();
   // Do all the things ...
-  addSelectedItemToCart();  //initiated
+  addSelectedItemToCart(event);  //initiated
   cart.saveToLocalStorage(); //
   updateCounter();
   updateCartPreview();
@@ -35,27 +36,19 @@ function handleSubmit(event) {
 }
 
 // TODO: Add the selected item and quantity to the cart
-function addSelectedItemToCart() {
+function addSelectedItemToCart(event) {
   console.log('addselectitemtocart function works');
   // TODO: suss out the item picked from the select list
   for(var i = 0; i < Product.allProducts.length; i++){
-    if(event.target.name === Product.allProducts[i].name){            //check this when click to submit
+    console.log('hit for loop');
+    if(event.target.items.value === Product.allProducts[i].name){            //check this when click to submit
       console.log('target match');
-      var trEl = document.createElement('tr');
-      var productTd = document.createElement('td');
-      var removeTd = document.createElement('td');
-      removeTd.textContent = 'remove';
-      trEl.appendChild(removeTd);
-      var quantityTd = document.getElementById('quantity');
-      console.log(quantityTd);
-      productTd.textContent = Product.allProducts[i].name;
-      trEl.appendChild(productTd);
-      trEl.appendChild(quantityTd);
-      document.getElementById('cart').appendChild(trEl);
+      var cartItem = document.createElement('p');
+      cartItem.textContent = `${event.target.items.value} ${event.target.quantity.value}`;
     }
   }
   // TODO: get the quantity
- 
+  document.getElementById('cartContents').appendChild(cartItem);
   // TODO: using those, add one item to the Cart
 
 }
