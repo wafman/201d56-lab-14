@@ -12,7 +12,9 @@ function populateForm() {
   //TODO: Add an <option> tag inside the form's select for each product
   var selectElement = document.getElementById('items');
   for (var i in Product.allProducts) {
-
+    var optionEl = document.createElement('option');
+    optionEl.textContent = Product.allProducts[i].name;
+    selectElement.appendChild(optionEl);
   }
 
 }
@@ -23,10 +25,10 @@ function populateForm() {
 function handleSubmit(event) {
 
   // TODO: Prevent the page from reloading
-
+  event.preventDefault();
   // Do all the things ...
-  addSelectedItemToCart();
-  cart.saveToLocalStorage();
+  addSelectedItemToCart();  //initiated
+  cart.saveToLocalStorage(); //
   updateCounter();
   updateCartPreview();
 
@@ -34,9 +36,28 @@ function handleSubmit(event) {
 
 // TODO: Add the selected item and quantity to the cart
 function addSelectedItemToCart() {
+  console.log('addselectitemtocart function works');
   // TODO: suss out the item picked from the select list
+  for(var i = 0; i < Product.allProducts.length; i++){
+    if(event.target.name === Product.allProducts[i].name){            //check this when click to submit
+      console.log('target match');
+      var trEl = document.createElement('tr');
+      var productTd = document.createElement('td');
+      var removeTd = document.createElement('td');
+      removeTd.textContent = 'remove';
+      trEl.appendChild(removeTd);
+      var quantityTd = document.getElementById('quantity');
+      console.log(quantityTd);
+      productTd.textContent = Product.allProducts[i].name;
+      trEl.appendChild(productTd);
+      trEl.appendChild(quantityTd);
+      document.getElementById('cart').appendChild(trEl);
+    }
+  }
   // TODO: get the quantity
+ 
   // TODO: using those, add one item to the Cart
+
 }
 
 // TODO: Update the cart count in the header nav with the number of items in the Cart
